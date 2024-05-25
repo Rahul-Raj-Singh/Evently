@@ -1,9 +1,10 @@
-﻿using Evently.Modules.Events.Api.Events;
+﻿using Evently.Modules.Events.Application.Abstractions.Data;
+using Evently.Modules.Events.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 
-namespace Evently.Modules.Events.Api.Database;
+namespace Evently.Modules.Events.Infrastructure.Database;
 
-public class EventsDbContext(DbContextOptions<EventsDbContext> options) : DbContext(options)
+public class EventsDbContext(DbContextOptions<EventsDbContext> options) : DbContext(options), IUnitOfWork
 {
     public DbSet<Event> Events { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -17,3 +17,14 @@ dotnet_diagnostic.IDE0320.severity = none
 
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+
+# CA1030: Use events where appropriate
+dotnet_diagnostic.CA1030.severity = none
+
+# CS9113: Parameter is unread.
+dotnet_diagnostic.CS9113.severity = none
+
+# CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = none
+
+dotnet_diagnostic.CA1724.severity = none

@@ -1,3 +1,4 @@
+using Evently.Modules.Events.Domain.Abstractions;
 using FluentValidation;
 using MediatR;
 
@@ -7,9 +8,10 @@ public sealed record CreateEventCommand(
     string Title,
     string Description,
     string Location,
+    Guid CategoryId,
     DateTime StartsAtUtc,
     DateTime? EndsAtUtc
-) : IRequest<Guid>;
+) : IRequest<Result<Guid>>;
 
 public sealed class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
 {

@@ -28,3 +28,14 @@ dotnet_diagnostic.CS9113.severity = none
 dotnet_diagnostic.CA1062.severity = none
 
 dotnet_diagnostic.CA1724.severity = none
+
+# CA1040: Avoid empty interfaces
+dotnet_diagnostic.CA1040.severity = none
+
+# CA1032: Implement standard exception constructors
+dotnet_diagnostic.CA1032.severity = none
+
+# CA1819: Properties should not return arrays
+dotnet_diagnostic.CA1819.severity = none
+
+dotnet_diagnostic.CA1812.severity = none

@@ -1,17 +1,14 @@
-﻿using Evently.Modules.Events.Application;
-using Evently.Modules.Events.Application.Abstractions.Data;
+﻿using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Domain.Categories;
 using Evently.Modules.Events.Domain.Events;
 using Evently.Modules.Events.Domain.TicketTypes;
 using Evently.Modules.Events.Infrastructure.Categories;
-using Evently.Modules.Events.Infrastructure.Clock;
 using Evently.Modules.Events.Infrastructure.Database;
 using Evently.Modules.Events.Infrastructure.Events;
 using Evently.Modules.Events.Infrastructure.TicketTypes;
 using Evently.Modules.Events.Presentation.Categories;
 using Evently.Modules.Events.Presentation.Events;
 using Evently.Modules.Events.Presentation.TicketTypes;
-using FluentValidation;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,25 +30,12 @@ public static class EventsModule
     
     public static IServiceCollection AddEventsModule(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddMediatR(config => 
-        {
-            config.RegisterServicesFromAssembly(Application.AssemblyReference.Assembly);
-        });
-
-        services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
-
         var dbConnnectionString = configuration.GetConnectionString("Database");
-
-        var npgSqlDataSource = new NpgsqlDataSourceBuilder(dbConnnectionString).Build();
-        services.TryAddSingleton(npgSqlDataSource);
 
         services.AddDbContext<EventsDbContext>(options => options
             .UseNpgsql(dbConnnectionString)
             .UseSnakeCaseNamingConvention());
 
-        services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
-
-        services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();

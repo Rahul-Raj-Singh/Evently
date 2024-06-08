@@ -1,6 +1,6 @@
-using Evently.Modules.Events.Domain.Abstractions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Evently.Modules.Events.Application.Abstractions.Exceptions;
+namespace Evently.Common.Application.Exceptions;
 
 public class EventlyException : Exception
 {

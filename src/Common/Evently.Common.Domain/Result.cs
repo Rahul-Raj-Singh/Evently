@@ -1,5 +1,4 @@
-﻿namespace Evently.Modules.Events.Domain.Abstractions;
-
+﻿namespace Evently.Common.Domain;
 public class Result
 {
     public Result(bool isSuccess, Error error)
@@ -34,4 +33,7 @@ public class Result<TValue> : Result
 
     public TValue Value => IsSuccess ? _value! : 
         throw new InvalidOperationException("The value of failure result cannot be accessed!");
+
+    public static Result<TValue> ValidationFailure(Error error) =>
+        new(default, false, error);
 }

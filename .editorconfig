@@ -39,3 +39,12 @@ dotnet_diagnostic.CA1032.severity = none
 dotnet_diagnostic.CA1819.severity = none
 
 dotnet_diagnostic.CA1812.severity = none
+
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
+
+# IDE0022: Use block body for method
+dotnet_diagnostic.IDE0022.severity = none
+
+# CA1000: Do not declare static members on generic types
+dotnet_diagnostic.CA1000.severity = none

@@ -1,6 +1,6 @@
-﻿using Evently.Modules.Events.Application;
+﻿using Evently.Common.Application.Clock;
 
-namespace Evently.Modules.Events.Infrastructure.Clock;
+namespace Evently.Common.Infrastructure.Clock;
 
 public class DateTimeProvider : IDateTimeProvider
 {

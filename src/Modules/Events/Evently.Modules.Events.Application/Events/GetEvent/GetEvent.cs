@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using Evently.Modules.Events.Application.Abstractions.Data;
+using Evently.Common.Application.Data;
 using MediatR;
 
 namespace Evently.Modules.Events.Application.Events.GetEvent;

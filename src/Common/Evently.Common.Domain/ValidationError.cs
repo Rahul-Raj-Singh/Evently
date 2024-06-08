@@ -1,5 +1,4 @@
-﻿namespace Evently.Modules.Events.Domain.Abstractions;
-
+﻿namespace Evently.Common.Domain;
 public sealed class ValidationError : Error
 {
     public ValidationError(Error[] errors)

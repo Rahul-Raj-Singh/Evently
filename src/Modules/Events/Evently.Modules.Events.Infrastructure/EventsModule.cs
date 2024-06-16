@@ -1,4 +1,5 @@
-﻿using Evently.Modules.Events.Application.Abstractions.Data;
+﻿using Evently.Common.Infrastructure.Interceptors;
+using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Domain.Categories;
 using Evently.Modules.Events.Domain.Events;
 using Evently.Modules.Events.Domain.TicketTypes;
@@ -32,9 +33,10 @@ public static class EventsModule
     {
         var dbConnnectionString = configuration.GetConnectionString("Database");
 
-        services.AddDbContext<EventsDbContext>(options => options
+        services.AddDbContext<EventsDbContext>((sp, options) => options
             .UseNpgsql(dbConnnectionString)
-            .UseSnakeCaseNamingConvention());
+            .UseSnakeCaseNamingConvention()
+            .AddInterceptors(sp.GetRequiredService<PublishDomainEventsInterceptor>()));
 
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();

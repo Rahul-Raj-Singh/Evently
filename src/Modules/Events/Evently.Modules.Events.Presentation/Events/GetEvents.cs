@@ -1,5 +1,5 @@
-﻿using Evently.Modules.Events.Application.Events.GetEvents;
-using Evently.Modules.Events.Presentation.ApiResults;
+﻿using Evently.Common.Presentation.ApiResults;
+using Evently.Modules.Events.Application.Events.GetEvents;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +15,7 @@ internal static class GetEvents
         {
             var result = await sender.Send(new GetEventsQuery());
 
-            return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
+            return result.Match(Results.Ok, ApiResults.Problem);
         })
         .WithTags(Tags.Events);
     }

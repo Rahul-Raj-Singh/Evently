@@ -1,6 +1,6 @@
 ﻿using Evently.Common.Domain;
+using Evently.Common.Presentation.ApiResults;
 using Evently.Modules.Events.Application.Categories.CreateCategory;
-using Evently.Modules.Events.Presentation.ApiResults;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +16,7 @@ internal static class CreateCategory
         {
             Result<Guid> result = await sender.Send(new CreateCategoryCommand(request.Name));
 
-            return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
+            return result.Match(Results.Ok, ApiResults.Problem);
         })
         .WithTags(Tags.Categories);
     }

@@ -3,6 +3,7 @@ using Evently.Api.Middleware;
 using Evently.Common.Application;
 using Evently.Common.Infrastructure;
 using Evently.Modules.Events.Infrastructure;
+using Evently.Modules.Ticketing.Infrastructure;
 using Evently.Modules.Users.Infrastructure;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -22,17 +23,21 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var dbConnectionString = builder.Configuration.GetConnectionString("Database")!;
+var redisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 
 builder.Services.AddApplication([
     Evently.Modules.Events.Application.AssemblyReference.Assembly,
-    Evently.Modules.Users.Application.AssemblyReference.Assembly]);
+    Evently.Modules.Users.Application.AssemblyReference.Assembly,
+    Evently.Modules.Ticketing.Application.AssemblyReference.Assembly,
+]);
 
-builder.Services.AddInfrastructure(dbConnectionString);
+builder.Services.AddInfrastructure(dbConnectionString, redisConnectionString);
 
-builder.Configuration.AddModuleConfiguration(["events", "users"]);
+builder.Configuration.AddModuleConfiguration(["events", "users", "ticketing"]);
 
 builder.Services.AddEventsModule(builder.Configuration);
 builder.Services.AddUsersModule(builder.Configuration);
+builder.Services.AddTicketingModule(builder.Configuration);
 
 builder.Services.AddHealthChecks().AddNpgSql(dbConnectionString);
 
@@ -46,6 +51,7 @@ if (app.Environment.IsDevelopment())
 
 EventsModule.MapEndpoints(app);
 UsersModule.MapEndpoints(app);
+// TODO: Add Ticketing endpoints
 
 app.MapHealthChecks("health", new HealthCheckOptions
 {

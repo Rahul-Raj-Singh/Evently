@@ -8,6 +8,7 @@ public class User : Entity
     public string FirstName { get; private set;}
     public string LastName { get; private set;}
     public string Email { get; private set;}
+    public string IdentityId { get; private set;}
 
     public static User Create(string firstName, string lastName, string email)
     {
@@ -16,7 +17,8 @@ public class User : Entity
             Id = Guid.NewGuid(),
             FirstName = firstName,
             LastName = lastName,
-            Email = email
+            Email = email,
+            IdentityId = Guid.NewGuid().ToString(), // TODO: replace this logic
         };
 
         user.Raise(new UserRegisteredDomainEvent(user.Id));

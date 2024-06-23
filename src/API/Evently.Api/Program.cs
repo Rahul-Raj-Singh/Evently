@@ -31,7 +31,8 @@ builder.Services.AddApplication([
     Evently.Modules.Ticketing.Application.AssemblyReference.Assembly,
 ]);
 
-builder.Services.AddInfrastructure(dbConnectionString, redisConnectionString);
+builder.Services.AddInfrastructure(dbConnectionString, redisConnectionString, [
+    TicketingModule.ConfigureConsumers]);
 
 builder.Configuration.AddModuleConfiguration(["events", "users", "ticketing"]);
 
@@ -51,7 +52,7 @@ if (app.Environment.IsDevelopment())
 
 EventsModule.MapEndpoints(app);
 UsersModule.MapEndpoints(app);
-// TODO: Add Ticketing endpoints
+TicketingModule.MapEndpoints(app);
 
 app.MapHealthChecks("health", new HealthCheckOptions
 {

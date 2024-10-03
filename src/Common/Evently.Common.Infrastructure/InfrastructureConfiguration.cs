@@ -2,6 +2,7 @@
 using Evently.Common.Application.Clock;
 using Evently.Common.Application.Data;
 using Evently.Common.Application.EventBus;
+using Evently.Common.Infrastructure.Authentication;
 using Evently.Common.Infrastructure.Caching;
 using Evently.Common.Infrastructure.Clock;
 using Evently.Common.Infrastructure.Data;
@@ -21,6 +22,8 @@ public static class InfrastructureConfiguration
         string redisConnectionString,
         Action<IRegistrationConfigurator>[] actions)
     {
+        services.AddAuthenticationInternal();
+        
         // db
         var npgSqlDataSource = new NpgsqlDataSourceBuilder(dbConnnectionString).Build();
         services.TryAddSingleton(npgSqlDataSource);
@@ -31,8 +34,6 @@ public static class InfrastructureConfiguration
 
 
         // cache    
-        services.TryAddSingleton<ICacheService, CacheService>();
-
         IConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
         services.AddStackExchangeRedisCache(options => 
             options.ConnectionMultiplexerFactory = () => Task.FromResult(connectionMultiplexer));

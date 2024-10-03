@@ -24,6 +24,7 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(
             return await next();
         }
 
+        // validation failure
         if (typeof(TResponse).IsGenericType &&
             typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
         {

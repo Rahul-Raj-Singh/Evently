@@ -26,6 +26,7 @@ internal static class GetCategories
 
             return result.Match(Results.Ok, ApiResults.Problem);
         })
+        .RequireAuthorization()
         .WithTags(Tags.Categories);
     }
 }

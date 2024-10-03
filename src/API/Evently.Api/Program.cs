@@ -63,4 +63,8 @@ app.UseSerilogRequestLogging();
 
 app.UseExceptionHandler();
 
+app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.Run();

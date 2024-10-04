@@ -19,7 +19,8 @@ public static class RegisterUser
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Email = request.Email
+                Email = request.Email,
+                Password = request.Password
             });
 
             return result.Match(Results.Ok, ApiResults.Problem);
@@ -28,5 +29,5 @@ public static class RegisterUser
         .AllowAnonymous();
     }
 
-    internal sealed record Request(string FirstName, string LastName, string Email);
+    internal sealed record Request(string FirstName, string LastName, string Email, string Password);
 }

@@ -1,5 +1,9 @@
 {
   "Users": {
-    
+    "TokenUrl": "http://localhost:18080/realms/evently/protocol/openid-connect/token",
+    "AdminUrl": "http://localhost:18080/admin/realms/evently/users",
+    "ConfidentialClientId": "evently-confidential-client",
+    "ConfidentialClientSecret": "yfuCCfHAHFKxw6z8uvpLoUKa8d9zL5Xa",
+    "PublicClientId": "evently-public-client"
   }
 }

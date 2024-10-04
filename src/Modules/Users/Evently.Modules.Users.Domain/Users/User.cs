@@ -10,7 +10,7 @@ public class User : Entity
     public string Email { get; private set;}
     public string IdentityId { get; private set;}
 
-    public static User Create(string firstName, string lastName, string email)
+    public static User Create(string firstName, string lastName, string email, string identityId)
     {
         var user = new User
         {
@@ -18,7 +18,7 @@ public class User : Entity
             FirstName = firstName,
             LastName = lastName,
             Email = email,
-            IdentityId = Guid.NewGuid().ToString(), // TODO: replace this logic
+            IdentityId = identityId
         };
 
         user.Raise(new UserRegisteredDomainEvent(user.Id));

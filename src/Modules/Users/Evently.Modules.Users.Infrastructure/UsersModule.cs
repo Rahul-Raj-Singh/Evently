@@ -1,7 +1,9 @@
 ﻿using Evently.Common.Infrastructure.Interceptors;
 using Evently.Modules.Users.Application.Abstractions.Data;
+using Evently.Modules.Users.Application.Abstractions.Identity;
 using Evently.Modules.Users.Domain.Users;
 using Evently.Modules.Users.Infrastructure.Database;
+using Evently.Modules.Users.Infrastructure.Identity;
 using Evently.Modules.Users.Infrastructure.Users;
 using EventlyModules.Users.Presentation.Users;
 using Microsoft.AspNetCore.Routing;
@@ -29,6 +31,8 @@ public static class UsersModule
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UsersDbContext>());
+
+        services.AddScoped<IIdentityProviderService, IdentityProviderService>();
 
         return services;
     }

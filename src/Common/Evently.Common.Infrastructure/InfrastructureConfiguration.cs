@@ -22,6 +22,8 @@ public static class InfrastructureConfiguration
         string redisConnectionString,
         Action<IRegistrationConfigurator>[] actions)
     {
+        services.AddHttpClient();
+        
         services.AddAuthenticationInternal();
         
         // db

@@ -1,7 +1,8 @@
-﻿using Evently.Common.Domain;
+﻿using System.Security.Claims;
+using Evently.Common.Domain;
+using Evently.Common.Infrastructure.Authentication;
 using Evently.Common.Presentation.ApiResults;
 using Evently.Modules.Users.Application.GetUser;
-using Evently.Modules.Users.Application.UpdateUser;
 using Evently.Modules.Users.Presentation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -14,15 +15,16 @@ public static class GetUser
 {
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("users/{userId}", async (Guid userId, ISender sender) => 
+        app.MapGet("users", async (ClaimsPrincipal claims, ISender sender) => 
         {
             Result<UserResponse> result = await sender.Send(new GetUserQuery
             {
-                UserId = userId,
+                UserId = claims.GetUserId(),
             });
 
             return result.Match(Results.Ok, ApiResults.Problem);
         })
+        .RequireAuthorization("users:read")
         .WithTags(Tags.Users);
     }
 }

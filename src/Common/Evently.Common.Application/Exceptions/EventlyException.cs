@@ -12,4 +12,6 @@ public class EventlyException : Exception
     }
     public string RequestName { get; }
     public Error? Error { get; }
+
+    public override string Message => $"{base.Message}-{Error?.Code}-{Error?.Description}";
 }

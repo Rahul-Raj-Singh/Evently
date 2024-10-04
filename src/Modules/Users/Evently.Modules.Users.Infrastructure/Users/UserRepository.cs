@@ -13,6 +13,12 @@ internal sealed class UserRepository(UsersDbContext context) : IUserRepository
 
     public void Insert(User user)
     {
+        foreach (var role in user.Roles)
+        {
+            // role is already seeded in db. Ask EF to not insert new row
+            context.Attach(role);
+        }
+
         context.Users.Add(user);
     }
 }

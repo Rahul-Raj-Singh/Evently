@@ -9,6 +9,8 @@ public class User : Entity
     public string LastName { get; private set;}
     public string Email { get; private set;}
     public string IdentityId { get; private set;}
+    private readonly List<Role> _roles = [];
+    public List<Role> Roles => _roles;
 
     public static User Create(string firstName, string lastName, string email, string identityId)
     {
@@ -20,6 +22,8 @@ public class User : Entity
             Email = email,
             IdentityId = identityId
         };
+
+        user._roles.Add(Role.Member);
 
         user.Raise(new UserRegisteredDomainEvent(user.Id));
 

@@ -1,7 +1,9 @@
-﻿using Evently.Common.Infrastructure.Interceptors;
+﻿using Evently.Common.Application.Authorization;
+using Evently.Common.Infrastructure.Interceptors;
 using Evently.Modules.Users.Application.Abstractions.Data;
 using Evently.Modules.Users.Application.Abstractions.Identity;
 using Evently.Modules.Users.Domain.Users;
+using Evently.Modules.Users.Infrastructure.Authorization;
 using Evently.Modules.Users.Infrastructure.Database;
 using Evently.Modules.Users.Infrastructure.Identity;
 using Evently.Modules.Users.Infrastructure.Users;
@@ -33,6 +35,7 @@ public static class UsersModule
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UsersDbContext>());
 
         services.AddScoped<IIdentityProviderService, IdentityProviderService>();
+        services.AddScoped<IPermissionService, PermissionService>();
 
         return services;
     }
